@@ -1,10 +1,21 @@
+import { useEffect, useState } from "react"
+
 export default async function Home() {
-  const res = await fetch("http://3.26.131.243/test");
-  const data = await res.json();
+  const [data, setData] = useState(null)
+  const [isLoading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('http://3.26.24.106/test')
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+        setLoading(false)
+      })
+  }, [])
   return (
     <main>
       <div>
-        id: {data.id} - name:   {data.name}
+        {data}
       </div>
     </main>
   )
